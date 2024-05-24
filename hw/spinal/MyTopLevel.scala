@@ -1,4 +1,5 @@
 import spinal.core._
+import spinal.lib._
 
 // Hardware definition
 case class MyTopLevel() extends Component {
@@ -10,6 +11,7 @@ case class MyTopLevel() extends Component {
   }
 }
 
-object MyTopLevelVerilog extends App {
-  Config.spinal.generateVerilog(MyTopLevel())
+object TopVerilog extends App {
+  val report = Config.spinal.generateVerilog(Top())
+  println(report.getRtlString())
 }
