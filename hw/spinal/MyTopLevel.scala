@@ -9,9 +9,18 @@ case class MyTopLevel() extends Component {
     val flag  = out Bool()
     val state = out UInt(8 bits)
   }
+
+  val counter = Reg(UInt(8 bits)) init 0
+
+  when(io.cond0) {
+    counter := counter + 1
+  }
+
+  io.state := counter
+  io.flag := (counter === 0) | io.cond1
 }
 
-object TopVerilog extends App {
-  val report = Config.spinal.generateVerilog(Top())
+object MyTopLevelVerilog extends App {
+  val report = Config.spinal.generateVerilog(MyTopLevel())
   println(report.getRtlString())
 }
